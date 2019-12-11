@@ -1,0 +1,23 @@
+{
+  "name": "amplitude-proxy",
+  "version": "1.0.0",
+  "main": "serve.js",
+  "repository": "https://github.com/navikt/tag-stillingstittel.git",
+  "author": "NAV",
+  "license": "MIT",
+  "scripts": {
+    "serve": "nodemon",
+    "test": "mocha src/**/*.spec.js",
+    "start-echo-server": "nohup node test-utils/echo-server.js &",
+    "up": "docker-compose up -d --build"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "fastify": "^2.8.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2",
+    "moxios": "^0.4.0",
+    "nodemon": "^1.19.2"
+  }
+}
