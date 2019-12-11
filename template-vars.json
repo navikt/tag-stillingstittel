@@ -1,0 +1,6 @@
+{
+  "liveness_path": "/health/is-alive",
+  "readiness_path": "/health/is-ready",
+  "port": 4542,
+  "pam_search_api_host": "pam-search-api.nais.oera.no"
+}
