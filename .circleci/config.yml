@@ -36,9 +36,6 @@ jobs:
           name: Install packages for test
           command: yarn install --ignore-optional --ignore-scripts
       - run:
-          name: Start echo server
-          command: yarn start-echo-server
-      - run:
           name: Start mocha test runner
           command: yarn test
       - save_cache:

@@ -3,7 +3,7 @@ kind: "Application"
 metadata:
   labels:
     team: {{team}}
-  name: tag-stillingstittel
+  name: tiltak-stillingstitler
   namespace: default
 spec:
   image: {{version}}

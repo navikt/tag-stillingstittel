@@ -2,14 +2,13 @@
   "name": "amplitude-proxy",
   "version": "1.0.0",
   "main": "serve.js",
-  "repository": "https://github.com/navikt/tag-stillingstittel.git",
+  "repository": "https://github.com/navikt/tiltak-stillingstitler.git",
   "author": "NAV",
   "license": "MIT",
   "scripts": {
     "serve": "nodemon",
     "test": "mocha src/**/*.spec.js",
-    "start-echo-server": "nohup node test-utils/echo-server.js &",
-    "up": "docker-compose up -d --build"
+    "start-proxy": "kubectl port-forward -n tpa --context dev-sbs svc/tpa-stilling-opendistro-elasticsearch 9200:9200"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.5.0",
@@ -18,7 +17,6 @@
   },
   "devDependencies": {
     "mocha": "^6.2.2",
-    "moxios": "^0.4.0",
     "nodemon": "^1.19.2"
   }
 }
