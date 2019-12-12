@@ -12,8 +12,9 @@
     "up": "docker-compose up -d --build"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "fastify": "^2.8.0"
+    "@elastic/elasticsearch": "^7.5.0",
+    "fastify": "^2.8.0",
+    "pino": "^5.14.0"
   },
   "devDependencies": {
     "mocha": "^6.2.2",
