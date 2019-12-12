@@ -10,7 +10,7 @@ executors:
   deployment-cli:
     environment:
       TEAM: teamtag
-      CLUSTER: prod-gcp
+      CLUSTER: prod-sbs
       REGISTRY: docker.io
     docker:
       - image: navikt/deployment-cli:latest
@@ -38,9 +38,9 @@ jobs:
       - run:
           name: Start echo server
           command: yarn start-echo-server
-      #- run:
-      #    name: Start mocha test runner
-      #    command: yarn test
+      - run:
+          name: Start mocha test runner
+          command: yarn test
       - save_cache:
           paths:
             - node_modules
@@ -72,7 +72,7 @@ jobs:
           image: $REGISTRY/$IMAGE_NAME
           tag: $RELEASE_VERSION
           environment: $CLUSTER
-          template-vars: template-vars.json
+          template-vars: src/template-vars.json
           enable-vars: true
 
 workflows:
@@ -87,11 +87,11 @@ workflows:
             - test
           filters:
             branches:
-              only: tag-440
+              only: master
       - deploy:
           context: tag-ci
           requires:
             - publish-docker
           filters:
             branches:
-              only: tag-440
+              only: master

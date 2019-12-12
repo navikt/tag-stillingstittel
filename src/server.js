@@ -1,8 +1,9 @@
 const fastify = require('fastify')({logger: false});
-const vars = require('../template-vars.json');
+const vars = require('./template-vars.json');
 
-fastify.get('/', require('./routes/index'));
-fastify.get('/search', require('./routes/search'));
+fastify.get('/',async (req, rep) => rep.redirect(vars.path_prefix));
+fastify.get(vars.path_prefix, require('./routes/index'));
+fastify.get(vars.path_prefix + '/search', require('./routes/search'));
 fastify.get(vars.liveness_path, async () => ({is: 'alive'}));
 fastify.get(vars.readiness_path, async () => ({is: 'ready'}));
 
