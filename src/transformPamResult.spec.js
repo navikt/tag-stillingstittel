@@ -8,5 +8,8 @@ describe('transform-pam-result', function() {
     assert.strictEqual(Array.isArray(transformedResult), true);
     assert.strictEqual(transformedResult.length > 2, true);
     assert.strictEqual(typeof transformedResult[0],'object');
+    assert.strictEqual(typeof transformedResult[0].label,'string');
+    assert.strictEqual(typeof transformedResult[0].styrk08,'number');
+    assert.strictEqual(typeof transformedResult[0].konseptId,'number');
   });
 });

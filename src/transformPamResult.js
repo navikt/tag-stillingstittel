@@ -6,12 +6,13 @@ module.exports = function(res) {
       output.push({
         label: hit._source.label,
         styrk08: parseInt(hit._source.styrk08),
+        konseptId: parseInt(hit._source.konseptId),
       });
     });
     return output;
   } else {
     logger.warn({
-      msg: 'Cant parse data.',
+      msg: 'Isj, klarer ikke parse data fra elastisearch.',
     });
     return [];
   }
