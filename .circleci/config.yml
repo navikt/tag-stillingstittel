@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  nais: navikt/nais-deployment@dev:master
+  nais: navikt/nais-deployment@3.2.1
   env: christeredvartsen/persist-env@0.0.4
 
 executors:
@@ -9,8 +9,7 @@ executors:
       - image: circleci/node:latest
   deployment-cli:
     environment:
-      TEAM: teamtag
-      CLUSTER: prod-sbs
+      TEAM: arbeidsgiver
       REGISTRY: docker.io
     docker:
       - image: navikt/deployment-cli:latest
@@ -53,7 +52,7 @@ jobs:
           image: $IMAGE_NAME
           tag: $RELEASE_VERSION
 
-  deploy:
+  deploy-dev:
     executor: deployment-cli
     steps:
       - checkout
@@ -63,12 +62,31 @@ jobs:
           command: echo $GITHUB_PRIVATE_KEY | base64 -d > .circleci/github.key.pem
       - nais/deploy-with-gh-app:
           repo: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-          nais-template: naiserator.yaml
+          nais-template: .nais/dev-sbs.yaml
           team: $TEAM
           github-app-id: 43789
           image: $REGISTRY/$IMAGE_NAME
           tag: $RELEASE_VERSION
-          environment: $CLUSTER
+          environment: dev-sbs
+          template-vars: src/template-vars.json
+          enable-vars: true
+
+  deploy-prod:
+    executor: deployment-cli
+    steps:
+      - checkout
+      - env/attach-env
+      - run:
+          name: Unpack Private Key
+          command: echo $GITHUB_PRIVATE_KEY | base64 -d > .circleci/github.key.pem
+      - nais/deploy-with-gh-app:
+          repo: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          nais-template: .nais/prod-sbs.yaml
+          team: $TEAM
+          github-app-id: 43789
+          image: $REGISTRY/$IMAGE_NAME
+          tag: $RELEASE_VERSION
+          environment: prod-sbs
           template-vars: src/template-vars.json
           enable-vars: true
 
@@ -85,10 +103,17 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy:
+      - deploy-dev:
           context: tag-ci
           requires:
             - publish-docker
+          filters:
+            branches:
+              only: master
+      - deploy-prod:
+          context: tag-ci
+          requires:
+            - deploy-dev
           filters:
             branches:
               only: master

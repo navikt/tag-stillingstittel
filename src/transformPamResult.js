@@ -1,4 +1,4 @@
-const logger = require('pino')();
+const logger = require('./logger');
 module.exports = function(res) {
   if (res.hits && res.hits.hits && Array.isArray(res.hits.hits)) {
     const output = [];

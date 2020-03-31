@@ -3,7 +3,7 @@ kind: "Application"
 metadata:
   labels:
     team: {{team}}
-  name: tiltak-stillingstitler
+  name: {{app_name}}
   namespace: default
 spec:
   image: {{version}}
@@ -31,9 +31,7 @@ spec:
       cpu: 100m
       memory: 128Mi
   ingresses:
-    - https://arbeidsgiver.nav.no{{path_prefix}}
-  logformat: accesslog
-  logtransform: dns_loglevel
+    - https://arbeidsgiver-q.nav.no{{path_prefix}}
   env:
     - name: APP_VERSION
       value: {{version}}
