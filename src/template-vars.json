@@ -2,5 +2,6 @@
   "liveness_path": "/health/is-alive",
   "readiness_path": "/health/is-ready",
   "port": 4542,
-  "path_prefix": "/stillingstitler"
+  "path_prefix": "/stillingstitler",
+  "app_name": "tiltak-stillingstitler"
 }

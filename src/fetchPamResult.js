@@ -1,4 +1,3 @@
-const logger = require('pino')();
 const {Client} = require('@elastic/elasticsearch');
 const elNode = process.env.STILLINGESBACKEND_URL ? process.env.STILLINGESBACKEND_URL : 'http://localhost:9200';
 const client = new Client({ node: elNode });

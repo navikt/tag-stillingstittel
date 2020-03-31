@@ -8,15 +8,16 @@
   "scripts": {
     "serve": "nodemon",
     "test": "mocha src/**/*.spec.js",
+    "generate-mock": "node _scripts/generate-mock.js",
     "start-proxy": "kubectl port-forward -n tpa --context dev-sbs svc/tpa-stilling-opendistro-elasticsearch 9200:9200"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "^7.5.0",
-    "fastify": "^2.8.0",
-    "pino": "^5.14.0"
+    "@elastic/elasticsearch": "^7.6.1",
+    "fastify": "^2.13.0",
+    "pino": "^6.0.0 "
   },
   "devDependencies": {
-    "mocha": "^6.2.2",
-    "nodemon": "^1.19.2"
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2"
   }
 }
