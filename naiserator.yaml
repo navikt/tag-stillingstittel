@@ -15,10 +15,10 @@ spec:
   ingresses:
     - {{ingress}}
   liveness:
-    path: /tiltak-stillingstitler/health/is-alive
+    path: /health/is-alive
     initialDelay: 5
   readiness:
-    path: /tiltak-stillingstitler/health/is-ready
+    path: /health/is-ready
     initialDelay: 5
   resources:
     limits:
