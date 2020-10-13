@@ -1,0 +1,46 @@
+name: Bygg og deploy master
+
+on:
+  push:
+    branches:
+      - 'master'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/tiltak-stillingstitler
+  IMAGE: docker.pkg.github.com/${{ github.repository }}/tiltak-stillingstitler:${{ github.sha }}
+
+jobs:
+  bygg:
+    name: Bygg
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut kode
+        uses: actions/checkout@v2
+
+      - run: npm ci --no-optional
+      - run: npm test
+
+      - name: Bygg, tag og push Docker-image
+        run: |
+          docker build --tag $IMAGE --tag $IMAGE_BASE:latest .
+          echo $GITHUB_TOKEN | docker login docker.pkg.github.com -u $GITHUB_REPOSITORY --password-stdin
+          docker push $IMAGE_BASE
+
+      - name: Deploy til dev-sbs
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-sbs
+          RESOURCE: naiserator.yaml
+          PRINT_PAYLOAD: true
+          VARS: .nais/dev-sbs.yaml
+
+      - name: Deploy til prod-sbs
+        uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-sbs
+          RESOURCE: naiserator.yaml
+          PRINT_PAYLOAD: true
+          VARS: .nais/prod-sbs.yaml
