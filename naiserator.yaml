@@ -1,5 +1,5 @@
-apiVersion: "nais.io/v1alpha1"
-kind: "Application"
+apiVersion: nais.io/v1alpha1
+kind: Application
 metadata:
   name: tiltak-stillingstitler
   namespace: arbeidsgiver
@@ -7,7 +7,7 @@ metadata:
     team: arbeidsgiver
 spec:
   replicas:
-    min: 2
+    min: 1
     max: 2
   image: {{image}}
   team: arbeidsgiver
@@ -29,4 +29,9 @@ spec:
       memory: 128Mi
   env:
     - name: STILLINGESBACKEND_URL
-      value: http://tpa-stilling-opendistro-elasticsearch.tpa:9200
+      value: http://stilling-opendistro-elasticsearch.teampam:9200
+  accessPolicy:
+    outbound:
+      rules:
+        - application: stilling-opendistro-elasticsearch
+          namespace: teampam
