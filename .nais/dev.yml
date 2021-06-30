@@ -1,6 +1,7 @@
 ingress:
   - https://tiltak-stillingstitler.dev.nav.no
   - https://tiltak-stillingstitler.dev.intern.nav.no
+  - https://tiltak-stillingstitler.dev-gcp.nais.io
 env:
   JANZZ_URL: https://arbeidsplassen.dev.nav.no
 external-host:
