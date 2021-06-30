@@ -36,5 +36,5 @@ spec:
     outbound:
       external:
         {{#each external-host}}
-          - "{{this}}"
+          - host: "{{this}}"
         {{/each}}
