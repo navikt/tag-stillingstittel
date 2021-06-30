@@ -1,4 +1,3 @@
-gcp-cluster: dev-gcp
 ingress: https://tiltak-stillingstitler.dev.nav.no
 env:
   JANZZ_URL: https://arbeidsplassen.dev.nav.no
