@@ -41,7 +41,11 @@ async function startApp() {
         });
 
         server.get("/", asyncHandler(async (req, res) => {
-            const response = await axios.get(`${config.janzzUrl}/pam-janzz/rest/typeahead/yrke-med-styrk08-nav?q=${req.query.q}`);
+            const response = await axios.get(`${config.janzzUrl}/pam-janzz/rest/typeahead/yrke-med-styrk08-nav`, {
+                params: {
+                    q: req.query.q
+                }
+            });
             res.json(response.data.typeaheadYrkeList.map(yrke => {
                 return {...yrke, styrk08: yrke.styrk08[0].substr(0, yrke.styrk08[0].indexOf("."))}
             }));
