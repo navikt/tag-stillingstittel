@@ -1,4 +1,6 @@
-ingress: https://tiltak-stillingstittel.dev.nav.no
+ingress:
+  - https://tiltak-stillingstittel.dev.nav.no
+  - https://tiltak-stillingstitler.dev.nav.no
 env:
   JANZZ_URL: https://arbeidsplassen.dev.nav.no
 external-host:
