@@ -1,23 +1,20 @@
 {
-  "name": "amplitude-proxy",
-  "version": "1.0.0",
-  "main": "serve.js",
-  "repository": "https://github.com/navikt/tiltak-stillingstitler.git",
-  "author": "NAV",
-  "license": "MIT",
-  "scripts": {
-    "serve": "nodemon",
-    "test": "mocha src/**/*.spec.js",
-    "generate-mock": "node _scripts/generate-mock.js",
-    "start-proxy": "kubectl port-forward -n tpa --context dev-sbs svc/tpa-stilling-opendistro-elasticsearch 9200:9200"
-  },
-  "dependencies": {
-    "@elastic/elasticsearch": "^7.6.1",
-    "fastify": "^2.13.0",
-    "pino": "^6.0.0 "
-  },
-  "devDependencies": {
-    "mocha": "^7.1.1",
-    "nodemon": "^2.0.2"
-  }
+    "name": "tiltak-stillingstitler",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "node -r dotenv/config server.js",
+        "serve": "node server.js"
+    },
+    "type": "module",
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-async-handler": "^1.1.4",
+        "winston": "^3.3.3"
+    },
+    "devDependencies": {}
 }

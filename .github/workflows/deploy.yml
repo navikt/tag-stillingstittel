@@ -1,6 +1,6 @@
 name: Bygg og deploy
 
-on: [ push, workflow_dispatch ]
+on: [push, workflow_dispatch]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -8,35 +8,30 @@ env:
 
 jobs:
   bygg:
-    name: Bygg
+    name: Bygg og deploy
     runs-on: ubuntu-latest
     steps:
       - name: Sjekk ut kode
         uses: actions/checkout@v2
-
-      - run: npm ci --no-optional
-      - run: npm test
-
+      - run: yarn install
       - name: Bygg, tag og push Docker-image
         run: |
           docker build --tag $IMAGE .
           echo ${{ secrets.GHCR_PUSH_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_PUSH_USERNAME }} --password-stdin
           docker push $IMAGE
-
-      - name: Deploy til dev-gcp
+      - name: Deploy til dev-fss
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
-          RESOURCE: naiserator.yaml
+          CLUSTER: dev-fss
+          RESOURCE: .nais/nais.yml
+          VARS: .nais/dev.yml
           PRINT_PAYLOAD: true
-          VARS: .nais/dev-gcp.yaml
-
-      - name: Deploy til prod-gcp
+      - name: Deploy til prod-fss
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: prod-gcp
-          RESOURCE: naiserator.yaml
+          CLUSTER: prod-fss
+          RESOURCE: .nais/nais.yml
+          VARS: .nais/prod.yml
           PRINT_PAYLOAD: true
-          VARS: .nais/prod-gcp.yaml
