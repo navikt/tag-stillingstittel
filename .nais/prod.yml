@@ -1,6 +1,6 @@
 ingress:
   - https://tiltak-stillingstitler.prod-gcp.nais.io
 env:
-  JANZZ_URL: https://arbeidsplassen.nav.no
+  JANZZ_URL: http://pam-janzz.teampam
 external-host:
   - arbeidsplassen.nav.no
