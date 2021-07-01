@@ -36,6 +36,9 @@ spec:
     {{/each}}
   accessPolicy:
     outbound:
+      rules:
+        - application: pam-janzz
+          namespace: teampam
       external:
         {{#each external-host}}
           - host: "{{this}}"
