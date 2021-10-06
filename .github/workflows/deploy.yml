@@ -4,7 +4,8 @@ on: [push, workflow_dispatch]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+  GITHUB_REPOSITORY: ${{ github.repository }}
+  IMAGE: ghcr.io/${{ github.repository }}/tiltaksgjennomforing:${{ github.sha }}
 
 jobs:
   bygg:
@@ -16,9 +17,9 @@ jobs:
       - run: yarn install
       - name: Bygg, tag og push Docker-image
         run: |
-          docker build --tag $IMAGE .
-          echo ${{ secrets.GHCR_PUSH_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_PUSH_USERNAME }} --password-stdin
-          docker push $IMAGE
+          echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
+          docker build --tag ${IMAGE} .
+          docker push ${IMAGE}
       - name: Deploy til dev-gcp
         uses: nais/deploy/actions/deploy@v1
         env:
