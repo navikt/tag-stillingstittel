@@ -43,3 +43,6 @@ spec:
         {{#each external-host}}
           - host: "{{this}}"
         {{/each}}
+    inbound:
+      rules:
+        - application: tiltaksgjennomforing
