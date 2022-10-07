@@ -46,3 +46,4 @@ spec:
     inbound:
       rules:
         - application: tiltaksgjennomforing
+        - application: tiltaksgjennomforing-intern
