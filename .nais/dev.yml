@@ -1,5 +1,5 @@
 ingress:
-  - https://tiltak-stillingstitler.dev-gcp.nais.io
+  - https://tiltak-stillingstitler.intern.dev.nav.no
 env:
   JANZZ_URL: http://pam-janzz.teampam
 external-host:
