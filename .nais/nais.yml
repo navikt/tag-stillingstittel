@@ -47,3 +47,6 @@ spec:
       rules:
         - application: tiltaksgjennomforing
         - application: tiltaksgjennomforing-intern
+        {{#each extra-inbound-apps}}
+        - application: {{this}}
+        {{/each}}
