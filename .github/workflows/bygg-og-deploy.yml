@@ -1,11 +1,10 @@
 name: Bygg og deploy
 
-on: [push, workflow_dispatch]
-
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  GITHUB_REPOSITORY: ${{ github.repository }}
-  IMAGE: ghcr.io/${{ github.repository }}/tiltak-stillingstitler:${{ github.sha }}
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -45,7 +44,6 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais.yml
           VARS: .nais/dev.yml
-          PRINT_PAYLOAD: true
           VAR: image=${{ needs.build.outputs.image }}
   deploy-prod:
     name: Deploy til prod-gcp
@@ -63,5 +61,4 @@ jobs:
             CLUSTER: prod-gcp
             RESOURCE: .nais/nais.yml
             VARS: .nais/prod.yml
-            PRINT_PAYLOAD: true
             VAR: image=${{ needs.build.outputs.image }}
