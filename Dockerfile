@@ -1,11 +1,9 @@
-FROM navikt/node-express:14-alpine
+FROM chainguard/node:latest
+ENV NODE_ENV=production
 
 WORKDIR /app
 
 COPY ./node_modules ./node_modules
-COPY server.js server.js
-COPY package.json package.json
+COPY server.mjs /app
 
-ENV NODE_EXTRA_CA_CERTS /etc/ssl/ca-bundle.pem
-
-EXPOSE 4000
+CMD [ "server.mjs" ]
