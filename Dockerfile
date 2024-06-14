@@ -1,4 +1,4 @@
-FROM chainguard/node:latest
+FROM chainguard/node:20
 ENV NODE_ENV=production
 
 WORKDIR /app
