@@ -2,7 +2,7 @@ import axios from "axios";
 import express from "express";
 import winston from "winston";
 import asyncHandler from "express-async-handler";
-import uuid from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 const logger = winston.createLogger({
   level: "info",
@@ -44,7 +44,7 @@ async function startApp() {
           `${config.pamUrl}/rest/typeahead/stilling`,
           {
             headers: {
-              "Nav-CallId": uuid.v4(),
+              "Nav-CallId": uuidv4(),
             },
             params: {
               stillingstittel: req.query.q,
