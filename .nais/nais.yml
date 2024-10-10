@@ -29,14 +29,11 @@ spec:
     - {{this}}
     {{/each}}
   env:
-    {{#each env}}
-     - name: "{{@key}}"
-       value: "{{this}}"
-    {{/each}}
+    PAM_URL: http://pam-ontologi.teampam
   accessPolicy:
     outbound:
       rules:
-        - application: pam-janzz
+        - application: pam-ontologi
           namespace: teampam
       external:
         {{#each external-host}}
