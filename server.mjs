@@ -52,7 +52,7 @@ async function startApp() {
           }
         );
         res.json(
-          response.data.typeaheadYrkeList.map((yrke) => {
+          response.data.map((yrke) => {
             return {
               ...yrke,
               styrk08: yrke.styrk08[0].substr(0, yrke.styrk08[0].indexOf(".")),
