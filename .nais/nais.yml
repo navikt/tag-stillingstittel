@@ -29,7 +29,8 @@ spec:
     - {{this}}
     {{/each}}
   env:
-    PAM_URL: http://pam-ontologi.teampam
+    - name: PAM_URL
+      value: http://pam-ontologi.teampam
   accessPolicy:
     outbound:
       rules:
