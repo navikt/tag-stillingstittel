@@ -53,6 +53,7 @@ async function startApp() {
         );
         res.json(
           response.data.map((yrke) => {
+            logger.info("Fant yrke: " + yrke);
             return {
               ...yrke,
               styrk08: yrke.styrk08[0].substr(0, yrke.styrk08[0].indexOf(".")),
