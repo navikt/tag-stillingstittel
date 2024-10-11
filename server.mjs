@@ -51,15 +51,7 @@ async function startApp() {
             },
           }
         );
-        res.json(
-          response.data.map((yrke) => {
-            return {
-              ...yrke,
-              styrk08orig: yrke.styrk08,
-              styrk08: yrke.styrk08[0].substr(0, yrke.styrk08[0].indexOf(".")),
-            };
-          })
-        );
+        res.json(response.data);
       })
     );
 
